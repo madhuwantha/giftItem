@@ -11,7 +11,7 @@ entity Image {
 	imagepath String
 }
 
-entity Order {
+entity GiftOrder {
 	descripption String,
 }
 entity Cart {
@@ -47,16 +47,15 @@ enum Role {
 
 relationship OneToMany {
   Category to GiftItem{category},
-
 }
 relationship OneToOne {
   Employee{user} to User,
   Client{user} to User,
-  Order{user} to User,
+  GiftOrder{user} to User,
 }
 
 relationship ManyToMany {
 	 Cart{giftItems} to GiftItem{cart},
-     Order{giftItems} to GiftItem{order}
+     GiftOrder{giftItems} to GiftItem{order}
 }
 

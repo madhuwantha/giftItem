@@ -11,8 +11,8 @@ import { ICategory } from 'app/shared/model/category.model';
 import { getEntities as getCategories } from 'app/entities/category/category.reducer';
 import { ICart } from 'app/shared/model/cart.model';
 import { getEntities as getCarts } from 'app/entities/cart/cart.reducer';
-import { IOrder } from 'app/shared/model/order.model';
-import { getEntities as getOrders } from 'app/entities/order/order.reducer';
+import { IGiftOrder } from 'app/shared/model/gift-order.model';
+import { getEntities as getGiftOrders } from 'app/entities/gift-order/gift-order.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './gift-item.reducer';
 import { IGiftItem } from 'app/shared/model/gift-item.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -26,7 +26,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
   const [orderId, setOrderId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { giftItemEntity, categories, carts, orders, loading, updating } = props;
+  const { giftItemEntity, categories, carts, giftOrders, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/gift-item');
@@ -41,7 +41,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
 
     props.getCategories();
     props.getCarts();
-    props.getOrders();
+    props.getGiftOrders();
   }, []);
 
   useEffect(() => {
@@ -142,7 +142,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
 const mapStateToProps = (storeState: IRootState) => ({
   categories: storeState.category.entities,
   carts: storeState.cart.entities,
-  orders: storeState.order.entities,
+  giftOrders: storeState.giftOrder.entities,
   giftItemEntity: storeState.giftItem.entity,
   loading: storeState.giftItem.loading,
   updating: storeState.giftItem.updating,
@@ -152,7 +152,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 const mapDispatchToProps = {
   getCategories,
   getCarts,
-  getOrders,
+  getGiftOrders,
   getEntity,
   updateEntity,
   createEntity,
