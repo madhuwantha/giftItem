@@ -1,0 +1,22 @@
+entity Category {
+	categoryName String
+}
+
+entity GiftItem {
+	giftName String,
+    descripption String,
+    unitPrice Double
+    
+}
+entity Image {
+	imagepath String
+}
+entity Iinventory {
+	avalibleQuantity Integer
+}
+
+entity Order {
+	imagepath String
+}
+
+

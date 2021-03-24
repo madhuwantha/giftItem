@@ -1,0 +1,29 @@
+{
+  "name": "GiftItem",
+  "fields": [
+    {
+      "fieldName": "giftName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripption",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unitPrice",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210324111508",
+  "entityTableName": "gift_item",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

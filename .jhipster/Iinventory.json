@@ -1,0 +1,21 @@
+{
+  "name": "Iinventory",
+  "fields": [
+    {
+      "fieldName": "avalibleQuantity",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210324111708",
+  "entityTableName": "iinventory",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
