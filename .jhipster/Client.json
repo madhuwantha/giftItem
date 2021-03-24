@@ -1,31 +1,39 @@
 {
-  "name": "Order",
+  "name": "Client",
   "fields": [
     {
-      "fieldName": "descripption",
+      "fieldName": "name",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "addressLineOne",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "addressLineTwo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postalCode",
+      "fieldType": "Double"
     }
   ],
   "relationships": [
     {
       "relationshipType": "one-to-one",
       "otherEntityName": "user",
-      "otherEntityRelationshipName": "order",
+      "otherEntityRelationshipName": "client",
       "relationshipName": "user",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "giftItem",
-      "otherEntityRelationshipName": "order",
-      "relationshipName": "giftItems",
       "otherEntityField": "id",
       "ownerSide": true
     }
   ],
-  "changelogDate": "20210324111808",
-  "entityTableName": "order",
+  "changelogDate": "20210324131848",
+  "entityTableName": "client",
   "dto": "no",
   "pagination": "no",
   "service": "no",

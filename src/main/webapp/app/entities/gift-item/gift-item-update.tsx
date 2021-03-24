@@ -11,6 +11,8 @@ import { ICategory } from 'app/shared/model/category.model';
 import { getEntities as getCategories } from 'app/entities/category/category.reducer';
 import { ICart } from 'app/shared/model/cart.model';
 import { getEntities as getCarts } from 'app/entities/cart/cart.reducer';
+import { IOrder } from 'app/shared/model/order.model';
+import { getEntities as getOrders } from 'app/entities/order/order.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './gift-item.reducer';
 import { IGiftItem } from 'app/shared/model/gift-item.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -21,9 +23,10 @@ export interface IGiftItemUpdateProps extends StateProps, DispatchProps, RouteCo
 export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
   const [categoryId, setCategoryId] = useState('0');
   const [cartId, setCartId] = useState('0');
+  const [orderId, setOrderId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { giftItemEntity, categories, carts, loading, updating } = props;
+  const { giftItemEntity, categories, carts, orders, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/gift-item');
@@ -38,6 +41,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
 
     props.getCategories();
     props.getCarts();
+    props.getOrders();
   }, []);
 
   useEffect(() => {
@@ -138,6 +142,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
 const mapStateToProps = (storeState: IRootState) => ({
   categories: storeState.category.entities,
   carts: storeState.cart.entities,
+  orders: storeState.order.entities,
   giftItemEntity: storeState.giftItem.entity,
   loading: storeState.giftItem.loading,
   updating: storeState.giftItem.updating,
@@ -147,6 +152,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 const mapDispatchToProps = {
   getCategories,
   getCarts,
+  getOrders,
   getEntity,
   updateEntity,
   createEntity,

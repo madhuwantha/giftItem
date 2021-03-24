@@ -82,12 +82,13 @@ public class OrderResource {
     /**
      * {@code GET  /orders} : get all the orders.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of orders in body.
      */
     @GetMapping("/orders")
-    public List<Order> getAllOrders() {
+    public List<Order> getAllOrders(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Orders");
-        return orderRepository.findAll();
+        return orderRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -99,7 +100,7 @@ public class OrderResource {
     @GetMapping("/orders/{id}")
     public ResponseEntity<Order> getOrder(@PathVariable Long id) {
         log.debug("REST request to get Order : {}", id);
-        Optional<Order> order = orderRepository.findById(id);
+        Optional<Order> order = orderRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(order);
     }
 

@@ -9,24 +9,21 @@ import { IRootState } from 'app/shared/reducers';
 
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
-import { IGiftItem } from 'app/shared/model/gift-item.model';
-import { getEntities as getGiftItems } from 'app/entities/gift-item/gift-item.reducer';
-import { getEntity, updateEntity, createEntity, reset } from './order.reducer';
-import { IOrder } from 'app/shared/model/order.model';
+import { getEntity, updateEntity, createEntity, reset } from './employee.reducer';
+import { IEmployee } from 'app/shared/model/employee.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
-export interface IOrderUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface IEmployeeUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
-export const OrderUpdate = (props: IOrderUpdateProps) => {
-  const [idsgiftItems, setIdsgiftItems] = useState([]);
+export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
   const [userId, setUserId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { orderEntity, users, giftItems, loading, updating } = props;
+  const { employeeEntity, users, loading, updating } = props;
 
   const handleClose = () => {
-    props.history.push('/order');
+    props.history.push('/employee');
   };
 
   useEffect(() => {
@@ -37,7 +34,6 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
     }
 
     props.getUsers();
-    props.getGiftItems();
   }, []);
 
   useEffect(() => {
@@ -49,9 +45,8 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
   const saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
       const entity = {
-        ...orderEntity,
+        ...employeeEntity,
         ...values,
-        giftItems: mapIdList(values.giftItems),
       };
 
       if (isNew) {
@@ -66,7 +61,7 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="giftItemApp.order.home.createOrEditLabel">Create or edit a Order</h2>
+          <h2 id="giftItemApp.employee.home.createOrEditLabel">Create or edit a Employee</h2>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -74,22 +69,28 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <AvForm model={isNew ? {} : orderEntity} onSubmit={saveEntity}>
+            <AvForm model={isNew ? {} : employeeEntity} onSubmit={saveEntity}>
               {!isNew ? (
                 <AvGroup>
-                  <Label for="order-id">ID</Label>
-                  <AvInput id="order-id" type="text" className="form-control" name="id" required readOnly />
+                  <Label for="employee-id">ID</Label>
+                  <AvInput id="employee-id" type="text" className="form-control" name="id" required readOnly />
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="descripptionLabel" for="order-descripption">
-                  Descripption
+                <Label id="nameLabel" for="employee-name">
+                  Name
                 </Label>
-                <AvField id="order-descripption" type="text" name="descripption" />
+                <AvField id="employee-name" type="text" name="name" />
               </AvGroup>
               <AvGroup>
-                <Label for="order-user">User</Label>
-                <AvInput id="order-user" type="select" className="form-control" name="user.id">
+                <Label id="ageLabel" for="employee-age">
+                  Age
+                </Label>
+                <AvField id="employee-age" type="string" className="form-control" name="age" />
+              </AvGroup>
+              <AvGroup>
+                <Label for="employee-user">User</Label>
+                <AvInput id="employee-user" type="select" className="form-control" name="user.id">
                   <option value="" key="0" />
                   {users
                     ? users.map(otherEntity => (
@@ -100,27 +101,7 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
                     : null}
                 </AvInput>
               </AvGroup>
-              <AvGroup>
-                <Label for="order-giftItems">Gift Items</Label>
-                <AvInput
-                  id="order-giftItems"
-                  type="select"
-                  multiple
-                  className="form-control"
-                  name="giftItems"
-                  value={orderEntity.giftItems && orderEntity.giftItems.map(e => e.id)}
-                >
-                  <option value="" key="0" />
-                  {giftItems
-                    ? giftItems.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
-                        </option>
-                      ))
-                    : null}
-                </AvInput>
-              </AvGroup>
-              <Button tag={Link} id="cancel-save" to="/order" replace color="info">
+              <Button tag={Link} id="cancel-save" to="/employee" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <span className="d-none d-md-inline">Back</span>
@@ -140,16 +121,14 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
 
 const mapStateToProps = (storeState: IRootState) => ({
   users: storeState.userManagement.users,
-  giftItems: storeState.giftItem.entities,
-  orderEntity: storeState.order.entity,
-  loading: storeState.order.loading,
-  updating: storeState.order.updating,
-  updateSuccess: storeState.order.updateSuccess,
+  employeeEntity: storeState.employee.entity,
+  loading: storeState.employee.loading,
+  updating: storeState.employee.updating,
+  updateSuccess: storeState.employee.updateSuccess,
 });
 
 const mapDispatchToProps = {
   getUsers,
-  getGiftItems,
   getEntity,
   updateEntity,
   createEntity,
@@ -159,4 +138,4 @@ const mapDispatchToProps = {
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderUpdate);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeUpdate);

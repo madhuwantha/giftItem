@@ -33,6 +33,14 @@
       "relationshipName": "cart",
       "otherEntityField": "id",
       "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "giftItems",
+      "relationshipName": "order",
+      "otherEntityField": "id",
+      "ownerSide": false
     }
   ],
   "changelogDate": "20210324111508",

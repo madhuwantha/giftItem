@@ -1,31 +1,27 @@
 {
-  "name": "Order",
+  "name": "Employee",
   "fields": [
     {
-      "fieldName": "descripption",
+      "fieldName": "name",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Double"
     }
   ],
   "relationships": [
     {
       "relationshipType": "one-to-one",
       "otherEntityName": "user",
-      "otherEntityRelationshipName": "order",
+      "otherEntityRelationshipName": "employee",
       "relationshipName": "user",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "giftItem",
-      "otherEntityRelationshipName": "order",
-      "relationshipName": "giftItems",
       "otherEntityField": "id",
       "ownerSide": true
     }
   ],
-  "changelogDate": "20210324111808",
-  "entityTableName": "order",
+  "changelogDate": "20210324131748",
+  "entityTableName": "employee",
   "dto": "no",
   "pagination": "no",
   "service": "no",

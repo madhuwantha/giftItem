@@ -4,6 +4,8 @@ package com.mycompany.myapp.domain;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Order.
@@ -20,6 +22,16 @@ public class Order implements Serializable {
 
     @Column(name = "descripption")
     private String descripption;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
+
+    @ManyToMany
+    @JoinTable(name = "jhi_order_gift_items",
+               joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "gift_items_id", referencedColumnName = "id"))
+    private Set<GiftItem> giftItems = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -41,6 +53,44 @@ public class Order implements Serializable {
 
     public void setDescripption(String descripption) {
         this.descripption = descripption;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Order user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<GiftItem> getGiftItems() {
+        return giftItems;
+    }
+
+    public Order giftItems(Set<GiftItem> giftItems) {
+        this.giftItems = giftItems;
+        return this;
+    }
+
+    public Order addGiftItems(GiftItem giftItem) {
+        this.giftItems.add(giftItem);
+        giftItem.getOrders().add(this);
+        return this;
+    }
+
+    public Order removeGiftItems(GiftItem giftItem) {
+        this.giftItems.remove(giftItem);
+        giftItem.getOrders().remove(this);
+        return this;
+    }
+
+    public void setGiftItems(Set<GiftItem> giftItems) {
+        this.giftItems = giftItems;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
