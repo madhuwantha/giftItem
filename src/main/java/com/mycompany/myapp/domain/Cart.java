@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * A Order.
+ * A Cart.
  */
 @Entity
-@Table(name = "jhi_order")
-public class Order implements Serializable {
+@Table(name = "cart")
+public class Cart implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +34,7 @@ public class Order implements Serializable {
         return descripption;
     }
 
-    public Order descripption(String descripption) {
+    public Cart descripption(String descripption) {
         this.descripption = descripption;
         return this;
     }
@@ -49,10 +49,10 @@ public class Order implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Order)) {
+        if (!(o instanceof Cart)) {
             return false;
         }
-        return id != null && id.equals(((Order) o).id);
+        return id != null && id.equals(((Cart) o).id);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Order implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Order{" +
+        return "Cart{" +
             "id=" + getId() +
             ", descripption='" + getDescripption() + "'" +
             "}";

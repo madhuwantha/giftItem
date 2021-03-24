@@ -1,14 +1,14 @@
 {
-  "name": "Order",
+  "name": "Inventory",
   "fields": [
     {
-      "fieldName": "descripption",
-      "fieldType": "String"
+      "fieldName": "avalibleQuantity",
+      "fieldType": "Integer"
     }
   ],
   "relationships": [],
-  "changelogDate": "20210324111808",
-  "entityTableName": "order",
+  "changelogDate": "20210324114237",
+  "entityTableName": "inventory",
   "dto": "no",
   "pagination": "no",
   "service": "no",

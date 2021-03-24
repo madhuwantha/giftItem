@@ -14,7 +14,15 @@
       "fieldType": "Double"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "giftItem",
+      "relationshipName": "category",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20210324111508",
   "entityTableName": "gift_item",
   "dto": "no",

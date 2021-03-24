@@ -7,20 +7,20 @@ import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipste
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { getEntity, updateEntity, createEntity, reset } from './order.reducer';
-import { IOrder } from 'app/shared/model/order.model';
+import { getEntity, updateEntity, createEntity, reset } from './cart.reducer';
+import { ICart } from 'app/shared/model/cart.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
-export interface IOrderUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface ICartUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
-export const OrderUpdate = (props: IOrderUpdateProps) => {
+export const CartUpdate = (props: ICartUpdateProps) => {
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { orderEntity, loading, updating } = props;
+  const { cartEntity, loading, updating } = props;
 
   const handleClose = () => {
-    props.history.push('/order');
+    props.history.push('/cart');
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
   const saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
       const entity = {
-        ...orderEntity,
+        ...cartEntity,
         ...values,
       };
 
@@ -56,7 +56,7 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="giftItemApp.order.home.createOrEditLabel">Create or edit a Order</h2>
+          <h2 id="giftItemApp.cart.home.createOrEditLabel">Create or edit a Cart</h2>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -64,20 +64,20 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <AvForm model={isNew ? {} : orderEntity} onSubmit={saveEntity}>
+            <AvForm model={isNew ? {} : cartEntity} onSubmit={saveEntity}>
               {!isNew ? (
                 <AvGroup>
-                  <Label for="order-id">ID</Label>
-                  <AvInput id="order-id" type="text" className="form-control" name="id" required readOnly />
+                  <Label for="cart-id">ID</Label>
+                  <AvInput id="cart-id" type="text" className="form-control" name="id" required readOnly />
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="descripptionLabel" for="order-descripption">
+                <Label id="descripptionLabel" for="cart-descripption">
                   Descripption
                 </Label>
-                <AvField id="order-descripption" type="text" name="descripption" />
+                <AvField id="cart-descripption" type="text" name="descripption" />
               </AvGroup>
-              <Button tag={Link} id="cancel-save" to="/order" replace color="info">
+              <Button tag={Link} id="cancel-save" to="/cart" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <span className="d-none d-md-inline">Back</span>
@@ -96,10 +96,10 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
-  orderEntity: storeState.order.entity,
-  loading: storeState.order.loading,
-  updating: storeState.order.updating,
-  updateSuccess: storeState.order.updateSuccess,
+  cartEntity: storeState.cart.entity,
+  loading: storeState.cart.loading,
+  updating: storeState.cart.updating,
+  updateSuccess: storeState.cart.updateSuccess,
 });
 
 const mapDispatchToProps = {
@@ -112,4 +112,4 @@ const mapDispatchToProps = {
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderUpdate);
+export default connect(mapStateToProps, mapDispatchToProps)(CartUpdate);

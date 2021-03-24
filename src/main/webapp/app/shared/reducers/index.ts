@@ -31,6 +31,14 @@ import iinventory, {
 import order, {
   OrderState
 } from 'app/entities/order/order.reducer';
+// prettier-ignore
+import inventory, {
+  InventoryState
+} from 'app/entities/inventory/inventory.reducer';
+// prettier-ignore
+import cart, {
+  CartState
+} from 'app/entities/cart/cart.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -48,6 +56,8 @@ export interface IRootState {
   readonly image: ImageState;
   readonly iinventory: IinventoryState;
   readonly order: OrderState;
+  readonly inventory: InventoryState;
+  readonly cart: CartState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -67,6 +77,8 @@ const rootReducer = combineReducers<IRootState>({
   image,
   iinventory,
   order,
+  inventory,
+  cart,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

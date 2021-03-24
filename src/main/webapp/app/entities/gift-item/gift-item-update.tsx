@@ -7,6 +7,8 @@ import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipste
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
+import { ICategory } from 'app/shared/model/category.model';
+import { getEntities as getCategories } from 'app/entities/category/category.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './gift-item.reducer';
 import { IGiftItem } from 'app/shared/model/gift-item.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -15,9 +17,10 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IGiftItemUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
+  const [categoryId, setCategoryId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { giftItemEntity, loading, updating } = props;
+  const { giftItemEntity, categories, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/gift-item');
@@ -29,6 +32,8 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
     } else {
       props.getEntity(props.match.params.id);
     }
+
+    props.getCategories();
   }, []);
 
   useEffect(() => {
@@ -89,6 +94,19 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
                 </Label>
                 <AvField id="gift-item-unitPrice" type="string" className="form-control" name="unitPrice" />
               </AvGroup>
+              <AvGroup>
+                <Label for="gift-item-category">Category</Label>
+                <AvInput id="gift-item-category" type="select" className="form-control" name="category.id">
+                  <option value="" key="0" />
+                  {categories
+                    ? categories.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
+              </AvGroup>
               <Button tag={Link} id="cancel-save" to="/gift-item" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
@@ -108,6 +126,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
+  categories: storeState.category.entities,
   giftItemEntity: storeState.giftItem.entity,
   loading: storeState.giftItem.loading,
   updating: storeState.giftItem.updating,
@@ -115,6 +134,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
+  getCategories,
   getEntity,
   updateEntity,
   createEntity,

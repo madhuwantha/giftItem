@@ -1,5 +1,5 @@
 {
-  "name": "Order",
+  "name": "Cart",
   "fields": [
     {
       "fieldName": "descripption",
@@ -7,8 +7,8 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20210324111808",
-  "entityTableName": "order",
+  "changelogDate": "20210324114437",
+  "entityTableName": "cart",
   "dto": "no",
   "pagination": "no",
   "service": "no",
