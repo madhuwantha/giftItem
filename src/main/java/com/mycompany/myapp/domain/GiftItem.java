@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A GiftItem.
@@ -28,9 +30,15 @@ public class GiftItem implements Serializable {
     @Column(name = "unit_price")
     private Double unitPrice;
 
+    @Column(name = "avalible_quantity")
+    private Integer avalibleQuantity;
+
     @ManyToOne
     @JsonIgnoreProperties(value = "giftItems", allowSetters = true)
     private Category category;
+
+    @OneToMany(mappedBy = "giftItem")
+    private Set<Cart> categories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -80,6 +88,19 @@ public class GiftItem implements Serializable {
         this.unitPrice = unitPrice;
     }
 
+    public Integer getAvalibleQuantity() {
+        return avalibleQuantity;
+    }
+
+    public GiftItem avalibleQuantity(Integer avalibleQuantity) {
+        this.avalibleQuantity = avalibleQuantity;
+        return this;
+    }
+
+    public void setAvalibleQuantity(Integer avalibleQuantity) {
+        this.avalibleQuantity = avalibleQuantity;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -91,6 +112,31 @@ public class GiftItem implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Set<Cart> getCategories() {
+        return categories;
+    }
+
+    public GiftItem categories(Set<Cart> carts) {
+        this.categories = carts;
+        return this;
+    }
+
+    public GiftItem addCategory(Cart cart) {
+        this.categories.add(cart);
+        cart.setGiftItem(this);
+        return this;
+    }
+
+    public GiftItem removeCategory(Cart cart) {
+        this.categories.remove(cart);
+        cart.setGiftItem(null);
+        return this;
+    }
+
+    public void setCategories(Set<Cart> carts) {
+        this.categories = carts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -118,6 +164,7 @@ public class GiftItem implements Serializable {
             ", giftName='" + getGiftName() + "'" +
             ", descripption='" + getDescripption() + "'" +
             ", unitPrice=" + getUnitPrice() +
+            ", avalibleQuantity=" + getAvalibleQuantity() +
             "}";
     }
 }
