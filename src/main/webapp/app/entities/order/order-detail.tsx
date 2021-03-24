@@ -29,6 +29,19 @@ export const OrderDetail = (props: IOrderDetailProps) => {
             <span id="descripption">Descripption</span>
           </dt>
           <dd>{orderEntity.descripption}</dd>
+          <dt>User</dt>
+          <dd>{orderEntity.user ? orderEntity.user.id : ''}</dd>
+          <dt>Gift Items</dt>
+          <dd>
+            {orderEntity.giftItems
+              ? orderEntity.giftItems.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {orderEntity.giftItems && i === orderEntity.giftItems.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/order" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

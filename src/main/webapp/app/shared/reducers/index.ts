@@ -39,6 +39,14 @@ import inventory, {
 import cart, {
   CartState
 } from 'app/entities/cart/cart.reducer';
+// prettier-ignore
+import employee, {
+  EmployeeState
+} from 'app/entities/employee/employee.reducer';
+// prettier-ignore
+import client, {
+  ClientState
+} from 'app/entities/client/client.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -58,6 +66,8 @@ export interface IRootState {
   readonly order: OrderState;
   readonly inventory: InventoryState;
   readonly cart: CartState;
+  readonly employee: EmployeeState;
+  readonly client: ClientState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -79,6 +89,8 @@ const rootReducer = combineReducers<IRootState>({
   order,
   inventory,
   cart,
+  employee,
+  client,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });
