@@ -47,6 +47,10 @@ import employee, {
 import client, {
   ClientState
 } from 'app/entities/client/client.reducer';
+// prettier-ignore
+import giftOrder, {
+  GiftOrderState
+} from 'app/entities/gift-order/gift-order.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -68,6 +72,7 @@ export interface IRootState {
   readonly cart: CartState;
   readonly employee: EmployeeState;
   readonly client: ClientState;
+  readonly giftOrder: GiftOrderState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -91,6 +96,7 @@ const rootReducer = combineReducers<IRootState>({
   cart,
   employee,
   client,
+  giftOrder,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

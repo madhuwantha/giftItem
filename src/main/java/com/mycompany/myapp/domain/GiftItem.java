@@ -44,7 +44,7 @@ public class GiftItem implements Serializable {
 
     @ManyToMany(mappedBy = "giftItems")
     @JsonIgnore
-    private Set<Order> orders = new HashSet<>();
+    private Set<GiftOrder> orders = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -145,29 +145,29 @@ public class GiftItem implements Serializable {
         this.carts = carts;
     }
 
-    public Set<Order> getOrders() {
+    public Set<GiftOrder> getOrders() {
         return orders;
     }
 
-    public GiftItem orders(Set<Order> orders) {
-        this.orders = orders;
+    public GiftItem orders(Set<GiftOrder> giftOrders) {
+        this.orders = giftOrders;
         return this;
     }
 
-    public GiftItem addOrder(Order order) {
-        this.orders.add(order);
-        order.getGiftItems().add(this);
+    public GiftItem addOrder(GiftOrder giftOrder) {
+        this.orders.add(giftOrder);
+        giftOrder.getGiftItems().add(this);
         return this;
     }
 
-    public GiftItem removeOrder(Order order) {
-        this.orders.remove(order);
-        order.getGiftItems().remove(this);
+    public GiftItem removeOrder(GiftOrder giftOrder) {
+        this.orders.remove(giftOrder);
+        giftOrder.getGiftItems().remove(this);
         return this;
     }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public void setOrders(Set<GiftOrder> giftOrders) {
+        this.orders = giftOrders;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

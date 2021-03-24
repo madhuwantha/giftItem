@@ -36,7 +36,7 @@
     },
     {
       "relationshipType": "many-to-many",
-      "otherEntityName": "order",
+      "otherEntityName": "giftOrder",
       "otherEntityRelationshipName": "giftItems",
       "relationshipName": "order",
       "otherEntityField": "id",
