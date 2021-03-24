@@ -41,17 +41,6 @@ export const GiftItemDetail = (props: IGiftItemDetailProps) => {
             <span id="avalibleQuantity">Avalible Quantity</span>
           </dt>
           <dd>{giftItemEntity.avalibleQuantity}</dd>
-          <dt>Cart</dt>
-          <dd>
-            {giftItemEntity.carts
-              ? giftItemEntity.carts.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {giftItemEntity.carts && i === giftItemEntity.carts.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
           <dt>Category</dt>
           <dd>{giftItemEntity.category ? giftItemEntity.category.id : ''}</dd>
         </dl>

@@ -20,19 +20,19 @@
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "cart",
-      "otherEntityRelationshipName": "giftItems",
-      "relationshipName": "cart",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
-    {
       "relationshipType": "many-to-one",
       "otherEntityName": "category",
       "otherEntityRelationshipName": "giftItem",
       "relationshipName": "category",
       "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "cart",
+      "otherEntityRelationshipName": "giftItems",
+      "relationshipName": "cart",
+      "otherEntityField": "id",
+      "ownerSide": false
     }
   ],
   "changelogDate": "20210324111508",

@@ -13,7 +13,7 @@
       "otherEntityRelationshipName": "cart",
       "relationshipName": "giftItems",
       "otherEntityField": "id",
-      "ownerSide": false
+      "ownerSide": true
     }
   ],
   "changelogDate": "20210324114437",

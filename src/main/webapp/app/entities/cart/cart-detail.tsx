@@ -29,6 +29,17 @@ export const CartDetail = (props: ICartDetailProps) => {
             <span id="descripption">Descripption</span>
           </dt>
           <dd>{cartEntity.descripption}</dd>
+          <dt>Gift Items</dt>
+          <dd>
+            {cartEntity.giftItems
+              ? cartEntity.giftItems.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {cartEntity.giftItems && i === cartEntity.giftItems.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/cart" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

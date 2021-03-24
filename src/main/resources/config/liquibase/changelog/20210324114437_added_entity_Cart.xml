@@ -25,6 +25,17 @@
 
     <changeSet id="20210324114437-1-relations" author="jhipster">
 
+        <createTable tableName="cart_gift_items">
+            <column name="gift_items_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cart_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="cart_id, gift_items_id" tableName="cart_gift_items"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 

@@ -8,11 +8,17 @@
     -->
     <changeSet id="20210324114437-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="gift_item_id"
-                                 baseTableName="cart"
-                                 constraintName="fk_cart_gift_item_id"
+        <addForeignKeyConstraint baseColumnNames="cart_id"
+                                 baseTableName="cart_gift_items"
+                                 constraintName="fk_cart_gift_items_cart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cart"/>
+
+        <addForeignKeyConstraint baseColumnNames="gift_items_id"
+                                 baseTableName="cart_gift_items"
+                                 constraintName="fk_cart_gift_items_gift_items_id"
                                  referencedColumnNames="id"
                                  referencedTableName="gift_item"/>
-
+        
     </changeSet>
 </databaseChangeLog>

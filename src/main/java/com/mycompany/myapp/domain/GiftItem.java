@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -33,15 +34,13 @@ public class GiftItem implements Serializable {
     @Column(name = "avalible_quantity")
     private Integer avalibleQuantity;
 
-    @ManyToMany
-    @JoinTable(name = "gift_item_cart",
-               joinColumns = @JoinColumn(name = "gift_item_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"))
-    private Set<Cart> carts = new HashSet<>();
-
     @ManyToOne
     @JsonIgnoreProperties(value = "giftItems", allowSetters = true)
     private Category category;
+
+    @ManyToMany(mappedBy = "giftItems")
+    @JsonIgnore
+    private Set<Cart> carts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -104,6 +103,19 @@ public class GiftItem implements Serializable {
         this.avalibleQuantity = avalibleQuantity;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public GiftItem category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Set<Cart> getCarts() {
         return carts;
     }
@@ -127,19 +139,6 @@ public class GiftItem implements Serializable {
 
     public void setCarts(Set<Cart> carts) {
         this.carts = carts;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public GiftItem category(Category category) {
-        this.category = category;
-        return this;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
