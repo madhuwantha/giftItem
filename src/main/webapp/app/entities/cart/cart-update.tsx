@@ -17,7 +17,7 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface ICartUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const CartUpdate = (props: ICartUpdateProps) => {
-  const [giftItemsId, setGiftItemsId] = useState('0');
+  const [idsgiftItems, setIdsgiftItems] = useState([]);
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
   const { cartEntity, giftItems, loading, updating } = props;
@@ -47,6 +47,7 @@ export const CartUpdate = (props: ICartUpdateProps) => {
       const entity = {
         ...cartEntity,
         ...values,
+        giftItems: mapIdList(values.giftItems),
       };
 
       if (isNew) {
@@ -81,6 +82,26 @@ export const CartUpdate = (props: ICartUpdateProps) => {
                   Descripption
                 </Label>
                 <AvField id="cart-descripption" type="text" name="descripption" />
+              </AvGroup>
+              <AvGroup>
+                <Label for="cart-giftItems">Gift Items</Label>
+                <AvInput
+                  id="cart-giftItems"
+                  type="select"
+                  multiple
+                  className="form-control"
+                  name="giftItems"
+                  value={cartEntity.giftItems && cartEntity.giftItems.map(e => e.id)}
+                >
+                  <option value="" key="0" />
+                  {giftItems
+                    ? giftItems.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/cart" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

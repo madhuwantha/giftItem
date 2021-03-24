@@ -1,5 +1,5 @@
-import { ICart } from 'app/shared/model/cart.model';
 import { ICategory } from 'app/shared/model/category.model';
+import { ICart } from 'app/shared/model/cart.model';
 
 export interface IGiftItem {
   id?: number;
@@ -7,8 +7,8 @@ export interface IGiftItem {
   descripption?: string;
   unitPrice?: number;
   avalibleQuantity?: number;
-  carts?: ICart[];
   category?: ICategory;
+  carts?: ICart[];
 }
 
 export const defaultValue: Readonly<IGiftItem> = {};

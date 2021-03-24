@@ -37,7 +37,6 @@ export const GiftItem = (props: IGiftItemProps) => {
                 <th>Descripption</th>
                 <th>Unit Price</th>
                 <th>Avalible Quantity</th>
-                <th>Cart</th>
                 <th>Category</th>
                 <th />
               </tr>
@@ -54,16 +53,6 @@ export const GiftItem = (props: IGiftItemProps) => {
                   <td>{giftItem.descripption}</td>
                   <td>{giftItem.unitPrice}</td>
                   <td>{giftItem.avalibleQuantity}</td>
-                  <td>
-                    {giftItem.carts
-                      ? giftItem.carts.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`cart/${val.id}`}>{val.id}</Link>
-                            {j === giftItem.carts.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
                   <td>{giftItem.category ? <Link to={`category/${giftItem.category.id}`}>{giftItem.category.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

@@ -82,13 +82,12 @@ public class GiftItemResource {
     /**
      * {@code GET  /gift-items} : get all the giftItems.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of giftItems in body.
      */
     @GetMapping("/gift-items")
-    public List<GiftItem> getAllGiftItems(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<GiftItem> getAllGiftItems() {
         log.debug("REST request to get all GiftItems");
-        return giftItemRepository.findAllWithEagerRelationships();
+        return giftItemRepository.findAll();
     }
 
     /**
@@ -100,7 +99,7 @@ public class GiftItemResource {
     @GetMapping("/gift-items/{id}")
     public ResponseEntity<GiftItem> getGiftItem(@PathVariable Long id) {
         log.debug("REST request to get GiftItem : {}", id);
-        Optional<GiftItem> giftItem = giftItemRepository.findOneWithEagerRelationships(id);
+        Optional<GiftItem> giftItem = giftItemRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(giftItem);
     }
 

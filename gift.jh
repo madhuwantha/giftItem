@@ -37,6 +37,6 @@ relationship OneToMany {
 }
 
 relationship ManyToMany {
-	GiftItem{cart} to Cart{giftItems}
+	 Cart{giftItems} to GiftItem{cart}
 }
 

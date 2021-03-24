@@ -82,12 +82,13 @@ public class CartResource {
     /**
      * {@code GET  /carts} : get all the carts.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of carts in body.
      */
     @GetMapping("/carts")
-    public List<Cart> getAllCarts() {
+    public List<Cart> getAllCarts(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Carts");
-        return cartRepository.findAll();
+        return cartRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -99,7 +100,7 @@ public class CartResource {
     @GetMapping("/carts/{id}")
     public ResponseEntity<Cart> getCart(@PathVariable Long id) {
         log.debug("REST request to get Cart : {}", id);
-        Optional<Cart> cart = cartRepository.findById(id);
+        Optional<Cart> cart = cartRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(cart);
     }
 
