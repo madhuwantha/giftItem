@@ -19,7 +19,7 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IGiftItemUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
-  const [cartId, setCartId] = useState('0');
+  const [idscart, setIdscart] = useState([]);
   const [categoryId, setCategoryId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
@@ -51,6 +51,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
       const entity = {
         ...giftItemEntity,
         ...values,
+        carts: mapIdList(values.carts),
       };
 
       if (isNew) {
@@ -106,7 +107,14 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
               </AvGroup>
               <AvGroup>
                 <Label for="gift-item-cart">Cart</Label>
-                <AvInput id="gift-item-cart" type="select" className="form-control" name="cart.id">
+                <AvInput
+                  id="gift-item-cart"
+                  type="select"
+                  multiple
+                  className="form-control"
+                  name="carts"
+                  value={giftItemEntity.carts && giftItemEntity.carts.map(e => e.id)}
+                >
                   <option value="" key="0" />
                   {carts
                     ? carts.map(otherEntity => (
