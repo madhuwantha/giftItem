@@ -75,6 +75,7 @@ class GiftItemGatlingTest extends Simulation {
                 , "giftName":"SAMPLE_TEXT"
                 , "descripption":"SAMPLE_TEXT"
                 , "unitPrice":null
+                , "avalibleQuantity":"0"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_giftItem_url"))).exitHereIfFailed

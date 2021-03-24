@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -21,6 +22,10 @@ public class Cart implements Serializable {
     @Column(name = "descripption")
     private String descripption;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "categories", allowSetters = true)
+    private GiftItem giftItem;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -41,6 +46,19 @@ public class Cart implements Serializable {
 
     public void setDescripption(String descripption) {
         this.descripption = descripption;
+    }
+
+    public GiftItem getGiftItem() {
+        return giftItem;
+    }
+
+    public Cart giftItem(GiftItem giftItem) {
+        this.giftItem = giftItem;
+        return this;
+    }
+
+    public void setGiftItem(GiftItem giftItem) {
+        this.giftItem = giftItem;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

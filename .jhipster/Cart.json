@@ -6,7 +6,13 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "giftItem",
+      "otherEntityRelationshipName": "category"
+    }
+  ],
   "changelogDate": "20210324114437",
   "entityTableName": "cart",
   "dto": "no",

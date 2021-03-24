@@ -38,6 +38,9 @@ public class GiftItemResourceIT {
     private static final Double DEFAULT_UNIT_PRICE = 1D;
     private static final Double UPDATED_UNIT_PRICE = 2D;
 
+    private static final Integer DEFAULT_AVALIBLE_QUANTITY = 1;
+    private static final Integer UPDATED_AVALIBLE_QUANTITY = 2;
+
     @Autowired
     private GiftItemRepository giftItemRepository;
 
@@ -59,7 +62,8 @@ public class GiftItemResourceIT {
         GiftItem giftItem = new GiftItem()
             .giftName(DEFAULT_GIFT_NAME)
             .descripption(DEFAULT_DESCRIPPTION)
-            .unitPrice(DEFAULT_UNIT_PRICE);
+            .unitPrice(DEFAULT_UNIT_PRICE)
+            .avalibleQuantity(DEFAULT_AVALIBLE_QUANTITY);
         return giftItem;
     }
     /**
@@ -72,7 +76,8 @@ public class GiftItemResourceIT {
         GiftItem giftItem = new GiftItem()
             .giftName(UPDATED_GIFT_NAME)
             .descripption(UPDATED_DESCRIPPTION)
-            .unitPrice(UPDATED_UNIT_PRICE);
+            .unitPrice(UPDATED_UNIT_PRICE)
+            .avalibleQuantity(UPDATED_AVALIBLE_QUANTITY);
         return giftItem;
     }
 
@@ -98,6 +103,7 @@ public class GiftItemResourceIT {
         assertThat(testGiftItem.getGiftName()).isEqualTo(DEFAULT_GIFT_NAME);
         assertThat(testGiftItem.getDescripption()).isEqualTo(DEFAULT_DESCRIPPTION);
         assertThat(testGiftItem.getUnitPrice()).isEqualTo(DEFAULT_UNIT_PRICE);
+        assertThat(testGiftItem.getAvalibleQuantity()).isEqualTo(DEFAULT_AVALIBLE_QUANTITY);
     }
 
     @Test
@@ -133,7 +139,8 @@ public class GiftItemResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(giftItem.getId().intValue())))
             .andExpect(jsonPath("$.[*].giftName").value(hasItem(DEFAULT_GIFT_NAME)))
             .andExpect(jsonPath("$.[*].descripption").value(hasItem(DEFAULT_DESCRIPPTION)))
-            .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.doubleValue())));
+            .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.doubleValue())))
+            .andExpect(jsonPath("$.[*].avalibleQuantity").value(hasItem(DEFAULT_AVALIBLE_QUANTITY)));
     }
     
     @Test
@@ -149,7 +156,8 @@ public class GiftItemResourceIT {
             .andExpect(jsonPath("$.id").value(giftItem.getId().intValue()))
             .andExpect(jsonPath("$.giftName").value(DEFAULT_GIFT_NAME))
             .andExpect(jsonPath("$.descripption").value(DEFAULT_DESCRIPPTION))
-            .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.doubleValue()));
+            .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.doubleValue()))
+            .andExpect(jsonPath("$.avalibleQuantity").value(DEFAULT_AVALIBLE_QUANTITY));
     }
     @Test
     @Transactional
@@ -174,7 +182,8 @@ public class GiftItemResourceIT {
         updatedGiftItem
             .giftName(UPDATED_GIFT_NAME)
             .descripption(UPDATED_DESCRIPPTION)
-            .unitPrice(UPDATED_UNIT_PRICE);
+            .unitPrice(UPDATED_UNIT_PRICE)
+            .avalibleQuantity(UPDATED_AVALIBLE_QUANTITY);
 
         restGiftItemMockMvc.perform(put("/api/gift-items")
             .contentType(MediaType.APPLICATION_JSON)
@@ -188,6 +197,7 @@ public class GiftItemResourceIT {
         assertThat(testGiftItem.getGiftName()).isEqualTo(UPDATED_GIFT_NAME);
         assertThat(testGiftItem.getDescripption()).isEqualTo(UPDATED_DESCRIPPTION);
         assertThat(testGiftItem.getUnitPrice()).isEqualTo(UPDATED_UNIT_PRICE);
+        assertThat(testGiftItem.getAvalibleQuantity()).isEqualTo(UPDATED_AVALIBLE_QUANTITY);
     }
 
     @Test

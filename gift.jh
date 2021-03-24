@@ -4,14 +4,13 @@ entity Category {
 entity GiftItem {
 	giftName String,
     descripption String,
-    unitPrice Double
+    unitPrice Double,
+    avalibleQuantity Integer
 }
 entity Image {
 	imagepath String
 }
-entity Inventory {
-	avalibleQuantity Integer
-}
+
 entity Order {
 	descripption String,
 }
@@ -22,10 +21,22 @@ entity User {
 	name String,
     email String
     password String
+    role Role
+}
+
+enum Role {
+    ROLE_ADMIN, 
+    ROLE_CLIENT,
+    ROLE_DB_ADMIN,
+    ROLE_EMPLOYEE,
+    ROLE_BM
 }
 
 relationship OneToMany {
   Category to GiftItem{category},
+}
+relationship ManyToOne {
+  Cart to GiftItem{category},
 }
 
 

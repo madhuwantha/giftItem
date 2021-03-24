@@ -12,6 +12,10 @@
     {
       "fieldName": "unitPrice",
       "fieldType": "Double"
+    },
+    {
+      "fieldName": "avalibleQuantity",
+      "fieldType": "Integer"
     }
   ],
   "relationships": [
@@ -21,6 +25,12 @@
       "otherEntityRelationshipName": "giftItem",
       "relationshipName": "category",
       "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "cart",
+      "otherEntityRelationshipName": "giftItem",
+      "relationshipName": "category"
     }
   ],
   "changelogDate": "20210324111508",
