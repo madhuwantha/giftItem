@@ -35,8 +35,8 @@ enum Role {
 relationship OneToMany {
   Category to GiftItem{category},
 }
-relationship ManyToOne {
-  GiftItem to Cart{giftItems},
-}
 
+relationship ManyToMany {
+	GiftItem{cart} to Cart{giftItems}
+}
 
