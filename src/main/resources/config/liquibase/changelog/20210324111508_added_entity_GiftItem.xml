@@ -28,6 +28,9 @@
             <column name="avalible_quantity" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="cart_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="category_id" type="bigint">
                 <constraints nullable="true" />
             </column>

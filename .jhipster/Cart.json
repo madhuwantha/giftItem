@@ -8,9 +8,10 @@
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-one",
+      "relationshipType": "one-to-many",
       "otherEntityName": "giftItem",
-      "otherEntityRelationshipName": "category"
+      "otherEntityRelationshipName": "cart",
+      "relationshipName": "giftItems"
     }
   ],
   "changelogDate": "20210324114437",

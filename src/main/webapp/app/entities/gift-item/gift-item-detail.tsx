@@ -41,6 +41,8 @@ export const GiftItemDetail = (props: IGiftItemDetailProps) => {
             <span id="avalibleQuantity">Avalible Quantity</span>
           </dt>
           <dd>{giftItemEntity.avalibleQuantity}</dd>
+          <dt>Cart</dt>
+          <dd>{giftItemEntity.cart ? giftItemEntity.cart.id : ''}</dd>
           <dt>Category</dt>
           <dd>{giftItemEntity.category ? giftItemEntity.category.id : ''}</dd>
         </dl>

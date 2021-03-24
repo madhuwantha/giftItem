@@ -7,8 +7,6 @@ import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipste
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { IGiftItem } from 'app/shared/model/gift-item.model';
-import { getEntities as getGiftItems } from 'app/entities/gift-item/gift-item.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './cart.reducer';
 import { ICart } from 'app/shared/model/cart.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -17,10 +15,9 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface ICartUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const CartUpdate = (props: ICartUpdateProps) => {
-  const [giftItemId, setGiftItemId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { cartEntity, giftItems, loading, updating } = props;
+  const { cartEntity, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/cart');
@@ -32,8 +29,6 @@ export const CartUpdate = (props: ICartUpdateProps) => {
     } else {
       props.getEntity(props.match.params.id);
     }
-
-    props.getGiftItems();
   }, []);
 
   useEffect(() => {
@@ -82,19 +77,6 @@ export const CartUpdate = (props: ICartUpdateProps) => {
                 </Label>
                 <AvField id="cart-descripption" type="text" name="descripption" />
               </AvGroup>
-              <AvGroup>
-                <Label for="cart-giftItem">Gift Item</Label>
-                <AvInput id="cart-giftItem" type="select" className="form-control" name="giftItem.id">
-                  <option value="" key="0" />
-                  {giftItems
-                    ? giftItems.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
-                        </option>
-                      ))
-                    : null}
-                </AvInput>
-              </AvGroup>
               <Button tag={Link} id="cancel-save" to="/cart" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
@@ -114,7 +96,6 @@ export const CartUpdate = (props: ICartUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
-  giftItems: storeState.giftItem.entities,
   cartEntity: storeState.cart.entity,
   loading: storeState.cart.loading,
   updating: storeState.cart.updating,
@@ -122,7 +103,6 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getGiftItems,
   getEntity,
   updateEntity,
   createEntity,
