@@ -28,9 +28,6 @@
             <column name="avalible_quantity" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="cart_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="category_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -40,6 +37,17 @@
 
     <changeSet id="20210324111508-1-relations" author="jhipster">
 
+        <createTable tableName="gift_item_cart">
+            <column name="cart_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gift_item_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="gift_item_id, cart_id" tableName="gift_item_cart"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 

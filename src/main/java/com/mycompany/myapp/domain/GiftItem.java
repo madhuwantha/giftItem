@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A GiftItem.
@@ -31,9 +33,11 @@ public class GiftItem implements Serializable {
     @Column(name = "avalible_quantity")
     private Integer avalibleQuantity;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "giftItems", allowSetters = true)
-    private Cart cart;
+    @ManyToMany
+    @JoinTable(name = "gift_item_cart",
+               joinColumns = @JoinColumn(name = "gift_item_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"))
+    private Set<Cart> carts = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "giftItems", allowSetters = true)
@@ -100,17 +104,29 @@ public class GiftItem implements Serializable {
         this.avalibleQuantity = avalibleQuantity;
     }
 
-    public Cart getCart() {
-        return cart;
+    public Set<Cart> getCarts() {
+        return carts;
     }
 
-    public GiftItem cart(Cart cart) {
-        this.cart = cart;
+    public GiftItem carts(Set<Cart> carts) {
+        this.carts = carts;
         return this;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public GiftItem addCart(Cart cart) {
+        this.carts.add(cart);
+        cart.getGiftItems().add(this);
+        return this;
+    }
+
+    public GiftItem removeCart(Cart cart) {
+        this.carts.remove(cart);
+        cart.getGiftItems().remove(this);
+        return this;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
     }
 
     public Category getCategory() {

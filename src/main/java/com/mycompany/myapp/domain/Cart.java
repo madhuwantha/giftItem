@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -23,7 +24,8 @@ public class Cart implements Serializable {
     @Column(name = "descripption")
     private String descripption;
 
-    @OneToMany(mappedBy = "cart")
+    @ManyToMany(mappedBy = "carts")
+    @JsonIgnore
     private Set<GiftItem> giftItems = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -59,13 +61,13 @@ public class Cart implements Serializable {
 
     public Cart addGiftItems(GiftItem giftItem) {
         this.giftItems.add(giftItem);
-        giftItem.setCart(this);
+        giftItem.getCarts().add(this);
         return this;
     }
 
     public Cart removeGiftItems(GiftItem giftItem) {
         this.giftItems.remove(giftItem);
-        giftItem.setCart(null);
+        giftItem.getCarts().remove(this);
         return this;
     }
 

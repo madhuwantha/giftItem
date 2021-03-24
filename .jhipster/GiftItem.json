@@ -20,9 +20,12 @@
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-one",
+      "relationshipType": "many-to-many",
       "otherEntityName": "cart",
-      "otherEntityRelationshipName": "giftItems"
+      "otherEntityRelationshipName": "giftItems",
+      "relationshipName": "cart",
+      "otherEntityField": "id",
+      "ownerSide": true
     },
     {
       "relationshipType": "many-to-one",

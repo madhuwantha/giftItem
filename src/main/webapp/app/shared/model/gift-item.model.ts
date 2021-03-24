@@ -7,7 +7,7 @@ export interface IGiftItem {
   descripption?: string;
   unitPrice?: number;
   avalibleQuantity?: number;
-  cart?: ICart;
+  carts?: ICart[];
   category?: ICategory;
 }
 
