@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -26,6 +27,10 @@ public class GiftItem implements Serializable {
 
     @Column(name = "unit_price")
     private Double unitPrice;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "giftItems", allowSetters = true)
+    private Category category;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -73,6 +78,19 @@ public class GiftItem implements Serializable {
 
     public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public GiftItem category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

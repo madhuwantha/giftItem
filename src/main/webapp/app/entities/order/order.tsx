@@ -33,7 +33,7 @@ export const Order = (props: IOrderProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Imagepath</th>
+                <th>Descripption</th>
                 <th />
               </tr>
             </thead>
@@ -45,7 +45,7 @@ export const Order = (props: IOrderProps) => {
                       {order.id}
                     </Button>
                   </td>
-                  <td>{order.imagepath}</td>
+                  <td>{order.descripption}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${order.id}`} color="info" size="sm">

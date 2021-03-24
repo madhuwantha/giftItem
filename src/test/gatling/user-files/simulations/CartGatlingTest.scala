@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Order entity.
+ * Performance test for the Cart entity.
  */
-class OrderGatlingTest extends Simulation {
+class CartGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -43,7 +43,7 @@ class OrderGatlingTest extends Simulation {
         "Authorization" -> "${access_token}"
     )
 
-    val scn = scenario("Test the Order entity")
+    val scn = scenario("Test the Cart entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -62,29 +62,29 @@ class OrderGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all orders")
-            .get("/api/orders")
+            exec(http("Get all carts")
+            .get("/api/carts")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new order")
-            .post("/api/orders")
+            .exec(http("Create new cart")
+            .post("/api/carts")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
                 , "descripption":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_order_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_cart_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created order")
-                .get("${new_order_url}")
+                exec(http("Get created cart")
+                .get("${new_cart_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created order")
-            .delete("${new_order_url}")
+            .exec(http("Delete created cart")
+            .delete("${new_cart_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

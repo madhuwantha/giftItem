@@ -1,6 +1,6 @@
 export interface IOrder {
   id?: number;
-  imagepath?: string;
+  descripption?: string;
 }
 
 export const defaultValue: Readonly<IOrder> = {};

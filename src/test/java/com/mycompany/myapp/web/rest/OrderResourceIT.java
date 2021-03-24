@@ -29,8 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class OrderResourceIT {
 
-    private static final String DEFAULT_IMAGEPATH = "AAAAAAAAAA";
-    private static final String UPDATED_IMAGEPATH = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRIPPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPPTION = "BBBBBBBBBB";
 
     @Autowired
     private OrderRepository orderRepository;
@@ -51,7 +51,7 @@ public class OrderResourceIT {
      */
     public static Order createEntity(EntityManager em) {
         Order order = new Order()
-            .imagepath(DEFAULT_IMAGEPATH);
+            .descripption(DEFAULT_DESCRIPPTION);
         return order;
     }
     /**
@@ -62,7 +62,7 @@ public class OrderResourceIT {
      */
     public static Order createUpdatedEntity(EntityManager em) {
         Order order = new Order()
-            .imagepath(UPDATED_IMAGEPATH);
+            .descripption(UPDATED_DESCRIPPTION);
         return order;
     }
 
@@ -85,7 +85,7 @@ public class OrderResourceIT {
         List<Order> orderList = orderRepository.findAll();
         assertThat(orderList).hasSize(databaseSizeBeforeCreate + 1);
         Order testOrder = orderList.get(orderList.size() - 1);
-        assertThat(testOrder.getImagepath()).isEqualTo(DEFAULT_IMAGEPATH);
+        assertThat(testOrder.getDescripption()).isEqualTo(DEFAULT_DESCRIPPTION);
     }
 
     @Test
@@ -119,7 +119,7 @@ public class OrderResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(order.getId().intValue())))
-            .andExpect(jsonPath("$.[*].imagepath").value(hasItem(DEFAULT_IMAGEPATH)));
+            .andExpect(jsonPath("$.[*].descripption").value(hasItem(DEFAULT_DESCRIPPTION)));
     }
     
     @Test
@@ -133,7 +133,7 @@ public class OrderResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(order.getId().intValue()))
-            .andExpect(jsonPath("$.imagepath").value(DEFAULT_IMAGEPATH));
+            .andExpect(jsonPath("$.descripption").value(DEFAULT_DESCRIPPTION));
     }
     @Test
     @Transactional
@@ -156,7 +156,7 @@ public class OrderResourceIT {
         // Disconnect from session so that the updates on updatedOrder are not directly saved in db
         em.detach(updatedOrder);
         updatedOrder
-            .imagepath(UPDATED_IMAGEPATH);
+            .descripption(UPDATED_DESCRIPPTION);
 
         restOrderMockMvc.perform(put("/api/orders")
             .contentType(MediaType.APPLICATION_JSON)
@@ -167,7 +167,7 @@ public class OrderResourceIT {
         List<Order> orderList = orderRepository.findAll();
         assertThat(orderList).hasSize(databaseSizeBeforeUpdate);
         Order testOrder = orderList.get(orderList.size() - 1);
-        assertThat(testOrder.getImagepath()).isEqualTo(UPDATED_IMAGEPATH);
+        assertThat(testOrder.getDescripption()).isEqualTo(UPDATED_DESCRIPPTION);
     }
 
     @Test

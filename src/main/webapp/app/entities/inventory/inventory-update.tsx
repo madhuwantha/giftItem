@@ -7,20 +7,20 @@ import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipste
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { getEntity, updateEntity, createEntity, reset } from './order.reducer';
-import { IOrder } from 'app/shared/model/order.model';
+import { getEntity, updateEntity, createEntity, reset } from './inventory.reducer';
+import { IInventory } from 'app/shared/model/inventory.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
-export interface IOrderUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface IInventoryUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
-export const OrderUpdate = (props: IOrderUpdateProps) => {
+export const InventoryUpdate = (props: IInventoryUpdateProps) => {
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { orderEntity, loading, updating } = props;
+  const { inventoryEntity, loading, updating } = props;
 
   const handleClose = () => {
-    props.history.push('/order');
+    props.history.push('/inventory');
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
   const saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
       const entity = {
-        ...orderEntity,
+        ...inventoryEntity,
         ...values,
       };
 
@@ -56,7 +56,7 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="giftItemApp.order.home.createOrEditLabel">Create or edit a Order</h2>
+          <h2 id="giftItemApp.inventory.home.createOrEditLabel">Create or edit a Inventory</h2>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -64,20 +64,20 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <AvForm model={isNew ? {} : orderEntity} onSubmit={saveEntity}>
+            <AvForm model={isNew ? {} : inventoryEntity} onSubmit={saveEntity}>
               {!isNew ? (
                 <AvGroup>
-                  <Label for="order-id">ID</Label>
-                  <AvInput id="order-id" type="text" className="form-control" name="id" required readOnly />
+                  <Label for="inventory-id">ID</Label>
+                  <AvInput id="inventory-id" type="text" className="form-control" name="id" required readOnly />
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="descripptionLabel" for="order-descripption">
-                  Descripption
+                <Label id="avalibleQuantityLabel" for="inventory-avalibleQuantity">
+                  Avalible Quantity
                 </Label>
-                <AvField id="order-descripption" type="text" name="descripption" />
+                <AvField id="inventory-avalibleQuantity" type="string" className="form-control" name="avalibleQuantity" />
               </AvGroup>
-              <Button tag={Link} id="cancel-save" to="/order" replace color="info">
+              <Button tag={Link} id="cancel-save" to="/inventory" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <span className="d-none d-md-inline">Back</span>
@@ -96,10 +96,10 @@ export const OrderUpdate = (props: IOrderUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
-  orderEntity: storeState.order.entity,
-  loading: storeState.order.loading,
-  updating: storeState.order.updating,
-  updateSuccess: storeState.order.updateSuccess,
+  inventoryEntity: storeState.inventory.entity,
+  loading: storeState.inventory.loading,
+  updating: storeState.inventory.updating,
+  updateSuccess: storeState.inventory.updateSuccess,
 });
 
 const mapDispatchToProps = {
@@ -112,4 +112,4 @@ const mapDispatchToProps = {
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderUpdate);
+export default connect(mapStateToProps, mapDispatchToProps)(InventoryUpdate);

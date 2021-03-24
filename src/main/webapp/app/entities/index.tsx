@@ -9,6 +9,8 @@ import GiftItem from './gift-item';
 import Image from './image';
 import Iinventory from './iinventory';
 import Order from './order';
+import Inventory from './inventory';
+import Cart from './cart';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -20,6 +22,8 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}image`} component={Image} />
       <ErrorBoundaryRoute path={`${match.url}iinventory`} component={Iinventory} />
       <ErrorBoundaryRoute path={`${match.url}order`} component={Order} />
+      <ErrorBoundaryRoute path={`${match.url}inventory`} component={Inventory} />
+      <ErrorBoundaryRoute path={`${match.url}cart`} component={Cart} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

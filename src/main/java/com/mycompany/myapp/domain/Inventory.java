@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * A Order.
+ * A Inventory.
  */
 @Entity
-@Table(name = "jhi_order")
-public class Order implements Serializable {
+@Table(name = "inventory")
+public class Inventory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,8 +18,8 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "descripption")
-    private String descripption;
+    @Column(name = "avalible_quantity")
+    private Integer avalibleQuantity;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -30,17 +30,17 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public String getDescripption() {
-        return descripption;
+    public Integer getAvalibleQuantity() {
+        return avalibleQuantity;
     }
 
-    public Order descripption(String descripption) {
-        this.descripption = descripption;
+    public Inventory avalibleQuantity(Integer avalibleQuantity) {
+        this.avalibleQuantity = avalibleQuantity;
         return this;
     }
 
-    public void setDescripption(String descripption) {
-        this.descripption = descripption;
+    public void setAvalibleQuantity(Integer avalibleQuantity) {
+        this.avalibleQuantity = avalibleQuantity;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -49,10 +49,10 @@ public class Order implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Order)) {
+        if (!(o instanceof Inventory)) {
             return false;
         }
-        return id != null && id.equals(((Order) o).id);
+        return id != null && id.equals(((Inventory) o).id);
     }
 
     @Override
@@ -63,9 +63,9 @@ public class Order implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Order{" +
+        return "Inventory{" +
             "id=" + getId() +
-            ", descripption='" + getDescripption() + "'" +
+            ", avalibleQuantity=" + getAvalibleQuantity() +
             "}";
     }
 }
