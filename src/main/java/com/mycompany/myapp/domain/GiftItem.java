@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A GiftItem.
@@ -35,10 +33,11 @@ public class GiftItem implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = "giftItems", allowSetters = true)
-    private Category category;
+    private Cart cart;
 
-    @OneToMany(mappedBy = "giftItem")
-    private Set<Cart> categories = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = "giftItems", allowSetters = true)
+    private Category category;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -101,6 +100,19 @@ public class GiftItem implements Serializable {
         this.avalibleQuantity = avalibleQuantity;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
+    public GiftItem cart(Cart cart) {
+        this.cart = cart;
+        return this;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -112,31 +124,6 @@ public class GiftItem implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public Set<Cart> getCategories() {
-        return categories;
-    }
-
-    public GiftItem categories(Set<Cart> carts) {
-        this.categories = carts;
-        return this;
-    }
-
-    public GiftItem addCategory(Cart cart) {
-        this.categories.add(cart);
-        cart.setGiftItem(this);
-        return this;
-    }
-
-    public GiftItem removeCategory(Cart cart) {
-        this.categories.remove(cart);
-        cart.setGiftItem(null);
-        return this;
-    }
-
-    public void setCategories(Set<Cart> carts) {
-        this.categories = carts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

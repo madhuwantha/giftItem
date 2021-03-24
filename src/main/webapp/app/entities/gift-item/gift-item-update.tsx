@@ -7,6 +7,8 @@ import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipste
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
+import { ICart } from 'app/shared/model/cart.model';
+import { getEntities as getCarts } from 'app/entities/cart/cart.reducer';
 import { ICategory } from 'app/shared/model/category.model';
 import { getEntities as getCategories } from 'app/entities/category/category.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './gift-item.reducer';
@@ -17,10 +19,11 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IGiftItemUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
+  const [cartId, setCartId] = useState('0');
   const [categoryId, setCategoryId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { giftItemEntity, categories, loading, updating } = props;
+  const { giftItemEntity, carts, categories, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/gift-item');
@@ -33,6 +36,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
       props.getEntity(props.match.params.id);
     }
 
+    props.getCarts();
     props.getCategories();
   }, []);
 
@@ -101,6 +105,19 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
                 <AvField id="gift-item-avalibleQuantity" type="string" className="form-control" name="avalibleQuantity" />
               </AvGroup>
               <AvGroup>
+                <Label for="gift-item-cart">Cart</Label>
+                <AvInput id="gift-item-cart" type="select" className="form-control" name="cart.id">
+                  <option value="" key="0" />
+                  {carts
+                    ? carts.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
+              </AvGroup>
+              <AvGroup>
                 <Label for="gift-item-category">Category</Label>
                 <AvInput id="gift-item-category" type="select" className="form-control" name="category.id">
                   <option value="" key="0" />
@@ -132,6 +149,7 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
+  carts: storeState.cart.entities,
   categories: storeState.category.entities,
   giftItemEntity: storeState.giftItem.entity,
   loading: storeState.giftItem.loading,
@@ -140,6 +158,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
+  getCarts,
   getCategories,
   getEntity,
   updateEntity,

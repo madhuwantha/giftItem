@@ -21,16 +21,15 @@
   "relationships": [
     {
       "relationshipType": "many-to-one",
+      "otherEntityName": "cart",
+      "otherEntityRelationshipName": "giftItems"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "category",
       "otherEntityRelationshipName": "giftItem",
       "relationshipName": "category",
       "otherEntityField": "id"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "cart",
-      "otherEntityRelationshipName": "giftItem",
-      "relationshipName": "category"
     }
   ],
   "changelogDate": "20210324111508",

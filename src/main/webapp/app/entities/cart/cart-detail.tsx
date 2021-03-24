@@ -29,8 +29,6 @@ export const CartDetail = (props: ICartDetailProps) => {
             <span id="descripption">Descripption</span>
           </dt>
           <dd>{cartEntity.descripption}</dd>
-          <dt>Gift Item</dt>
-          <dd>{cartEntity.giftItem ? cartEntity.giftItem.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/cart" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
