@@ -34,6 +34,7 @@ export const Cart = (props: ICartProps) => {
               <tr>
                 <th>ID</th>
                 <th>Descripption</th>
+                <th>Gift Item</th>
                 <th />
               </tr>
             </thead>
@@ -46,6 +47,7 @@ export const Cart = (props: ICartProps) => {
                     </Button>
                   </td>
                   <td>{cart.descripption}</td>
+                  <td>{cart.giftItem ? <Link to={`gift-item/${cart.giftItem.id}`}>{cart.giftItem.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${cart.id}`} color="info" size="sm">

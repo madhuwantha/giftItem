@@ -95,6 +95,12 @@ export const GiftItemUpdate = (props: IGiftItemUpdateProps) => {
                 <AvField id="gift-item-unitPrice" type="string" className="form-control" name="unitPrice" />
               </AvGroup>
               <AvGroup>
+                <Label id="avalibleQuantityLabel" for="gift-item-avalibleQuantity">
+                  Avalible Quantity
+                </Label>
+                <AvField id="gift-item-avalibleQuantity" type="string" className="form-control" name="avalibleQuantity" />
+              </AvGroup>
+              <AvGroup>
                 <Label for="gift-item-category">Category</Label>
                 <AvInput id="gift-item-category" type="select" className="form-control" name="category.id">
                   <option value="" key="0" />
